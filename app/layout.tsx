@@ -1,8 +1,12 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Noto_Sans_JP } from "next/font/google";
 import "./globals.css";
+import Image from "next/image";
 
-const inter = Inter({ subsets: ["latin"] });
+const noto = Noto_Sans_JP({
+  weight: '400',
+  preload: false
+});
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -15,8 +19,35 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={inter.className}>{children}</body>
+    <html lang="ja">
+      <body className={noto.className}>
+        <div className="flex flex-col min-h-screen">
+          <header className="flex flex-row items-center px-24 py-4 bg-slate-200">
+            <Image
+              src="/logo.svg"
+              alt="Logo"
+              width={60}
+              height={60}
+            />
+            <nav className="flex flex-row ml-auto">
+              <ul className="flex flex-row gap-4">
+                <li>
+                  <a href="/">Home</a>
+                </li>
+                <li>
+                  <a href="/about">About</a>
+                </li>
+              </ul>
+            </nav>
+          </header>
+          <main className="flex-1">
+            {children}
+          </main>
+          <footer className="bg-slate-500">
+            <span className="text-sm text-slate-100">2024 muranuun</span>
+          </footer>
+        </div>
+      </body>
     </html>
   );
 }
